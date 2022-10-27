@@ -1,0 +1,60 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+body{
+	background-size: contain;
+	/* background: url("../../TouXiang.jpg"); */
+	background-color: cadetblue;
+	background-color: #445469;
+}
+.video_panel .video_control .DJ div{
+	background-color: cornflowerblue;
+	border-radius: 50px;
+	display: inline-block;
+	padding: 20px 50px;
+	margin-left: 325px;
+	margin-top: 15px;
+}
+.video_panel .video_control .DJ h1{
+	cursor: pointer;
+}
+.video_panel{/*视频容器div*/
+	/*border: dashed;	视频边框*/
+	width: 1980px;
+	height: 1075px;
+	display: block;
+	margin: auto;
+	/* border: 1px solid red; */
+	background-color: darkcyan;
+	background-size: contain;
+	background: url("../../img/128TouXiang.jpg");
+}
+.video_panel video{/*设置视频播放器video的长款*/
+	cursor: pointer;/*设置鼠标变小手图标*/
+	margin: auto;
+	padding-top: 40px;
+	/* width: 50%;
+	height: 50%; */
+	width: 1600px;
+	height: 900px;
+	display: block;
+	/* border: 1px solid blue; */
+}
+.video_panel .video_control .progess{
+	cursor: pointer;/*设置鼠标变小手图标*/
+	display: inline-block;
+	border-radius:15px;
+	margin-top: 10px;
+	height: 20px;
+	width: 1600px;
+	background-color: white;
+	margin-left: 190px;
+}
+.video_panel .video_control .progess .now_progess{
+	cursor: pointer;/*设置鼠标变小手图标*/
+	border-radius:15px 10px 10px 15px;
+	height: 20px;
+	width: 0px;
+	background-color: dimgray;
+}

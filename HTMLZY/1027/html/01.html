@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>我制作的视频播放</title>
+		<link rel="icon" href="../../img/TX16.ico">
+		<link rel="stylesheet" href="../css/01.css">
+		<script type="text/javascript">
+			/*页面加载完毕后执行function*/
+			window.onload = function() {
+				/*把播放按钮绑定点击视频播放,实现播放*/
+				BF.onclick = function() {
+					/*如果视频未播放状态,就执行播放*/
+					if (player.paused) {	/*player.paused判断视频是否暂停*/
+						/*alert("视频播放")*/
+						player.play();	/*视频播放*/
+						BF.innerText = "暂停"	/*视频播放后把按钮功能改变为暂停*/
+					} else {	/*如果视频正在播放，那么就执行暂停*/
+						player.pause();	/*视频暂停*/
+						BF.innerText = "播放"	/*视频暂停后把按钮功能改变为播放*/
+					}
+
+				}
+				/*把播放按钮绑定点击视频全屏,实现全屏*/
+				QP.onclick = function(){
+					player.webkitRequestFullScreen();	/*全屏*/
+				}
+				/*视频绑定一个事件显示视频总时间*/
+				player.oncanplay = function(){
+					/*把总秒数转为对应的 时 分 秒 格式*/
+					var seconds = parseInt(player.duration);	/*总秒*/
+					var h = parseInt(seconds/60/60);	/*获取总小时*/
+					var m = parseInt(seconds/60%60);    /*获取不足一小时的分钟*/
+					var s = parseInt(seconds%60);    /*获取不足一分钟的秒*/
+					/*如果数字是1位,要在前面+0,如:5秒,显示为05*/
+					if(h<10){
+						h='0'+h
+					}
+					if(m<10){
+						m='0'+m
+					}
+					if(s<10){
+						s='0'+s
+					}
+					/*更改显示时间的span标记的内容*/
+					ZSJ.innerText=h+":"+m+":"+s;
+				}
+				/*添加视频播放时的时间*/
+				player.ontimeupdate = function(){
+					player.currentTime;	/*currentTime表示视频播放的时间*/
+					var seconds = parseInt(player.currentTime);	/*总秒*/
+					var h = parseInt(seconds/60/60);	/*获取总小时*/
+					var m = parseInt(seconds/60%60);    /*获取不足一小时的分钟*/
+					var s = parseInt(seconds%60);    /*获取不足一分钟的秒*/
+					/*如果数字是1位,要在前面+0,如:5秒,显示为05*/
+					if(h<10){
+						h='0'+h
+					}
+					if(m<10){
+						m='0'+m
+					}
+					if(s<10){
+						s='0'+s
+					}
+					/*更改显示时间的span标记的内容*/
+					XSJ.innerText=h+":"+m+":"+s;
+					/*视频播放,不断重新设置当前div的宽度,达到播放进度的效果*/
+					/*
+					总时间x秒	播放了y秒	那么10%宽度y/x*100+'%'
+					*/
+					now_progess.style.width=player.currentTime/player.duration*100+'%';
+				}
+				//鼠标点哪里就在哪里播放
+				progess.onclick = function(){
+					//总宽度代表视频的总长,已播放视频宽度有对应的百分比
+					//视频总时间 * (鼠标点击位置距离左边位置的宽度) / (总宽度)		为百分比
+					//假设点的进度条中间	50%, 视频总时长*0.5 = 当前要播放的时间
+					player.currentTime = event.offsetX/progess.offsetWidth*player.duration;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<!-- 视频播放器容器 -->
+		<div class="video_panel">
+			<!-- video视频播放控件 -->
+			<!-- autoplay="autoplay"		始终播放 -->
+			<video id="player" loop controls  src="../../video/玹月旁的流星.mp4"
+				/*poster="../../TouXiang.jpg" * /></video>
+			<!-- 自定义控制的div -->
+			<div class="video_control">
+				<!-- 自定义进度条 -->
+				<div id="progess" class="progess">
+					<!-- 播放进度显示 -->
+					<div id="now_progess" class="now_progess"></div>
+				</div>
+				<div class="DJ">
+					<!-- 播放按钮 -->
+					<!-- <div><h1><a id="BF" ><img src="../../TX32.ico"></a></h1></div> -->
+					<div><h1><a id="BF" >播放</a></h1></div>
+					<!-- 播放时间	总时间 -->
+					<div><h1><span id="XSJ">00:00:00</span>/<span id="ZSJ">00:00:00</span></h1></div>
+					<!-- <span>00:00:00</span>/<span id="ZSJ">00:00:00</span> -->
+					<!-- 全屏 -->
+					<div><h1><a id="QP">全屏</a></h1></div>
+				</div>
+			</div>
+		</div>
+		<a href="" accesskey="a">链接</a>
+	</body>
+</html>
